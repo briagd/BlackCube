@@ -375,7 +375,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 100
-  jumpForce: 5
+  jumpForce: 7
+  fallMultiplier: 3
+  lowJumpMultiplier: 2.5
   jumpEffect: {fileID: 2273519013937793631, guid: d1e3b9aa5eb5a4388b3d3729c6aeb6ee,
     type: 3}
   groundCheck: {fileID: 1126931485}

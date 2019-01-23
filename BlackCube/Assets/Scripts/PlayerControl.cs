@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
-    //public
+    //jumping variable
     public float speed;
     public float jumpForce;
+    public float fallMultiplier = 2.5f;
+    public float lowJumpMultiplier = 2f;
 
     public GameObject jumpEffect;
 
     //private
     float moveInput;
     bool facingRight = true;
+
+
     Rigidbody2D rb;
 
     //checking if is on ground
@@ -50,6 +54,8 @@ public class PlayerControl : MonoBehaviour
             Instantiate(jumpEffect, transform.position, Quaternion.identity);
 
         }
+
+        BetterJump();
     }
 
     private void FixedUpdate()
@@ -65,6 +71,18 @@ public class PlayerControl : MonoBehaviour
         } else if (facingRight == true && moveInput < 0)
         {
             Flip();
+        }
+    }
+
+
+    void BetterJump()
+    {
+        if (rb.velocity.y < 0)
+        {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        } else if(rb.velocity.y > 0 && !Input.GetKey(KeyCode.UpArrow))
+        {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
     }
 
